@@ -19,7 +19,7 @@ namespace Ovning1
             Console.Write("Lön: ");
             double wage = double.Parse(Console.ReadLine());
 
-            employees.Add(new Employee(name, wage));
+            employees.Add(new (name, wage));
         }
         public void DisplayEmployees()
 
@@ -28,12 +28,13 @@ namespace Ovning1
             {
                 foreach (Employee employee in employees)
                 {
-                    employee.displayDetails();
+                    //employee.DisplayDetails();
+                    Console.WriteLine(employee);
                 }
             } 
             else
             {
-                Console.WriteLine("Det finns inga anställda förnärvarande.");
+                Console.WriteLine("Det finns inga anställda för närvarande.");
             }
             
         }
