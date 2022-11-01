@@ -1,4 +1,8 @@
-﻿string selection = "";
+﻿using Ovning1;
+
+Register employees = new Register();
+
+string selection = "";
 bool exitProgram = false;
 do
 {
@@ -14,10 +18,10 @@ do
     switch (selection)
     {
         case "1":
-            Console.WriteLine("TO-DO: Add employee");
+            employees.DisplayEmployees();
             break;
         case "2":
-            Console.WriteLine("TO-DO: Display employees");
+            employees.AddEmployee();
             break;
         case "a":
         case "A":

@@ -9,13 +9,22 @@ namespace Ovning1
     internal class Employee
 
     {
-        string name;
-        double wage;
+        private string name;
+        private double wage;
 
-        public Employee(string name, double wage)
+        public Employee(string fullName, double monthlyWage)
         {
-            name = this.name;
-            wage = this.wage;
+            name = fullName;
+            wage = monthlyWage;
+        }
+
+        internal void displayDetails()
+        {
+            Console.WriteLine($"{name} tjänar {wage} per månad");
+        }
+        public override string ToString()
+        {
+            return $"{name} tjänar {wage} per månad";
         }
     }
 }
