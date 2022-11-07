@@ -8,8 +8,12 @@ namespace Ovning1
 {
     internal class Register
     {
-        private List<Employee> employees = new List<Employee>();
+        private List<Employee> employees;
 
+        public Register()
+        {
+            employees = new List<Employee>();
+        }
         public void AddEmployee()
         {
             

@@ -6,11 +6,8 @@ string selection = "";
 bool exitProgram = false;
 do
 {
-    Console.WriteLine("Personalregister");
-    Console.WriteLine("================");
-    Console.WriteLine("1. Visa anställda");
-    Console.WriteLine("2. Lägg till ny personal");
-    Console.WriteLine("(A)vsluta programmet\n\n");
+    ShowMainMenu();
+    
 
     Console.Write("Ditt val: ");
     selection = Console.ReadLine();
@@ -34,3 +31,12 @@ do
     }
 
 } while (!exitProgram);
+
+void ShowMainMenu()
+{
+    Console.WriteLine("Personalregister");
+    Console.WriteLine("================");
+    Console.WriteLine("1. Visa anställda");
+    Console.WriteLine("2. Lägg till ny personal");
+    Console.WriteLine("(A)vsluta programmet\n\n");
+}
