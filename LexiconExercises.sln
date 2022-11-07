@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovning1", "Ovning1\Ovning1.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovning2", "Ovning2\Ovning2.csproj", "{E831D40F-BBCE-4FE7-A0E4-B23A60ED8ABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ovning2Tests", "Ovning2Tests\Ovning2Tests.csproj", "{0740E7AC-7E67-47A5-B13D-C618B2512B1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ovning2Tests", "Ovning2Tests\Ovning2Tests.csproj", "{BA919A16-A2C9-442B-BED2-1811D178B49F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{E831D40F-BBCE-4FE7-A0E4-B23A60ED8ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E831D40F-BBCE-4FE7-A0E4-B23A60ED8ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E831D40F-BBCE-4FE7-A0E4-B23A60ED8ABF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0740E7AC-7E67-47A5-B13D-C618B2512B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0740E7AC-7E67-47A5-B13D-C618B2512B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0740E7AC-7E67-47A5-B13D-C618B2512B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0740E7AC-7E67-47A5-B13D-C618B2512B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA919A16-A2C9-442B-BED2-1811D178B49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA919A16-A2C9-442B-BED2-1811D178B49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA919A16-A2C9-442B-BED2-1811D178B49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA919A16-A2C9-442B-BED2-1811D178B49F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
