@@ -8,6 +8,11 @@ namespace Ovning3.Inheritance
 {
     internal class Pelican : Bird
     {
+        public Pelican(int weight, string name, string description, int age, double wingSpan, bool beakIsFullOfFish) : base(weight, name, description, age, wingSpan)
+        {
+            BeakIsFullOFish = beakIsFullOfFish;
+        }
+
         public bool BeakIsFullOFish { get; set; }
         public override string Stats()
         {

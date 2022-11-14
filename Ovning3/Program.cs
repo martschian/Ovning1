@@ -81,12 +81,12 @@ namespace Ovning3
             // 3.4.3
             List<Animal> animals = new List<Animal>()
             {
-                new Bird(),
-                new Dog(),
-                new Horse(),
-                new Wolf(),
-                new Wolfman(),
-                new Flamingo()
+                new Bird(1, "Blåfink", "En fågel", 1, 0.2),
+                new Dog(20, "Fido", "En hund", 6, "Berner Sennenhund"),
+                new Horse(200, "Legolas", "En häst", 12, false),
+                new Wolf(44, "Fenrir", "En varg", 200, true),
+                new Wolfman(120, "Lon Chaney", "En man eller en varg?", 50),
+                new Flamingo(3, "John Waters", "En flamingo", 5, 2, "Inte rosa")
             };
             // 3.4.6
             Console.WriteLine($"{Environment.NewLine}Skriv ut typ av djur och hur de låter");

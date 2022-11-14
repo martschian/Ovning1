@@ -8,7 +8,12 @@ namespace Ovning3.Inheritance
 {
     internal class Wolf : Animal
     {
-        public bool HowlsAtTheMoon { get; set; } = true;
+        public Wolf(int weight, string name, string description, int age, bool howlsAtTheMoon) : base(weight, name, description, age)
+        {
+            HowlsAtTheMoon = howlsAtTheMoon;
+        }
+
+        public bool HowlsAtTheMoon { get; set; }
         public override string DoSound()
         {
             return "Awwwoooo";

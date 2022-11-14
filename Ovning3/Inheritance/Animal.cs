@@ -16,8 +16,12 @@ namespace Ovning3.Inheritance
         public string Description { get; set; }
         public int Age { get; set; }
         public abstract string DoSound();
-        public Animal()
+        public Animal(int weight, string name, string description, int age)
         {
+            Weight = weight;
+            Name = name;
+            Description = description;
+            Age = age;
 
         }
         public virtual string Stats()

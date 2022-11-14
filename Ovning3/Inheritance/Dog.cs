@@ -8,6 +8,11 @@ namespace Ovning3.Inheritance
 {
     internal class Dog : Animal
     {
+        public Dog(int weight, string name, string description, int age, string breed) : base(weight, name, description, age)
+        {
+            Breed = breed;
+        }
+
         public string Breed { get; set; }
         public override string DoSound()
         {
