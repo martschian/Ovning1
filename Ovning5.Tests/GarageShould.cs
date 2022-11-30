@@ -38,7 +38,7 @@ namespace Ovning5.Tests
         [Fact]
         public void AddVehicle()
         {
-            var (actual, _) = garage.ParkVehicle(new Car("red", "Volvo", "740GLE", "ABC123", 4));
+            var (actual, _) = garage.AddVehicle(new Car("red", "Volvo", "740GLE", "ABC123", 4));
 
             Assert.True(actual);
             Assert.Equal(1, garage.Count);
@@ -48,8 +48,8 @@ namespace Ovning5.Tests
         public void FindVehicleByRegistrationNumber()
         {
             car = new Car("red", "Volvo", "740GLE", "MAG545", 4);
-            garage.ParkVehicle(car);
-            var actual = garage.RetrieveVehicle("MAG545");
+            _ = garage.AddVehicle(car);
+            var actual = garage.GetVehicle("MAG545");
 
             Assert.Equal(car, actual);
         }
@@ -57,8 +57,8 @@ namespace Ovning5.Tests
         [Fact]
         public void ReturnNullIfRetrieveVehicleByRegistrationNumberFails()
         {
-            _ = garage.ParkVehicle(new Car("red", "Volvo", "740GLE", "MAJ545", 4));
-            var actual = garage.RetrieveVehicle("ABC345");
+            _ = garage.AddVehicle(new Car("red", "Volvo", "740GLE", "MAJ545", 4));
+            var actual = garage.GetVehicle("ABC345");
 
             Assert.Null(actual);
         }
@@ -75,11 +75,11 @@ namespace Ovning5.Tests
             };
 
             //car = ;
-            _ = garage.ParkVehicle(car2);
+            _ = garage.AddVehicle(car2);
             //expected.Add(car);
 
             //car = ;
-            _ = garage.ParkVehicle(car);
+            _ = garage.AddVehicle(car);
             //expected.Add(car);
 
 

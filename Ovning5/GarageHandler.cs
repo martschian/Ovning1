@@ -4,10 +4,15 @@ namespace Ovning5
 {
     internal class GarageHandler
     {
-
-        public void Init(IUI ui)
+        private readonly IUI _ui;
+        public GarageHandler(IUI ui)
         {
-            ui.ShowMainMenu();
+            _ui = ui;
+        }
+
+        public void Init()
+        {
+            _ui.ShowMainMenu();
         }
 
     }

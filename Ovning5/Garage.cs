@@ -2,24 +2,32 @@
 
 namespace Ovning5
 {
-    internal class Garage<T> : IEnumerable<T> where T : Vehicle
+    internal class Garage<T> : IEnumerable<T> where T : IVehicle
     {
-        private readonly T[] vehicles;
-        private readonly Stack<int> freeSpaces = new();
-        public int Count => Capacity - freeSpaces.Count;
+        private readonly T[] _vehicles;
+        private readonly Stack<int> _freeParkingSpaces = new();
+        public int Count => Capacity - _freeParkingSpaces.Count;
         public int Capacity { get; }
-        public bool HasFreeSpace => freeSpaces.Count > 0;
+        public bool HasFreeSpace => _freeParkingSpaces.Count > 0;
 
         public Garage(int capacity)
         {
             Capacity = capacity;
-            // this.Count = 0;
-            IEnumerable<int> range = Enumerable.Range(0, capacity).Reverse();
-            foreach (var number in range)
+            InitializeFreeSpaces(capacity);
+            _vehicles = new T[capacity];
+        }
+
+        /// <summary>
+        /// Pushes the index of all free spaces onto the stack
+        /// </summary>
+        /// <param name="capacity">The number of spaces in the garage</param>
+        private void InitializeFreeSpaces(int capacity)
+        {
+            var range = Enumerable.Range(0, capacity).Reverse();
+            foreach (int number in range)
             {
-                freeSpaces.Push(number);
+                _freeParkingSpaces.Push(number);
             }
-            vehicles = new T[capacity];
         }
 
         /// <summary>
@@ -27,12 +35,12 @@ namespace Ovning5
         /// </summary>
         /// <param name="vehicle">The vehicle to be parked</param>
         /// <returns>True if there a parking spot was available, otherwise false</returns>
-        public (bool, string) ParkVehicle(T vehicle)
+        public (bool, string) AddVehicle(T vehicle)
         {
             ArgumentNullException.ThrowIfNull(vehicle, nameof(vehicle));
             if (!HasFreeSpace) return (false, "There are no free parking spaces!");
 
-            vehicles[FindFreeParkingSpace()] = vehicle;
+            _vehicles[GetFreeParkingSpace()] = vehicle;
             return (true, $"{vehicle} has been parked");
         }
 
@@ -44,10 +52,10 @@ namespace Ovning5
         public int FindVehicle(string registrationNumber)
         {
             // var result = vehicles.FirstOrDefault(vehicle => vehicle.RegistrationNumber == registrationNumber);
-            foreach (Vehicle vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
             {
                 if (vehicle?.RegistrationNumber == registrationNumber)
-                    return Array.IndexOf<Vehicle>(vehicles, vehicle);
+                    return Array.IndexOf<T>(_vehicles, vehicle);
             }
             return -1;
         }
@@ -56,25 +64,29 @@ namespace Ovning5
         /// Finds the first free parking space in the garage
         /// </summary>
         /// <returns>The index of the first free space or -1</returns>
-        public int FindFreeParkingSpace()
+        private int GetFreeParkingSpace()
         {
             if (!HasFreeSpace) return -1;
-            return freeSpaces.Pop();
+            return _freeParkingSpaces.Pop();
         }
-
-        public Vehicle? RetrieveVehicle(string registrationNumber)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="registrationNumber"></param>
+        /// <returns>The vehicle or default</returns>
+        public T GetVehicle(string registrationNumber)
         {
-            if (Count == 0) return null;
+            if (Count == 0) return default!;
 
             var parkingSpace = FindVehicle(registrationNumber);
             if (parkingSpace != -1)
             {
-                var vehicle = vehicles[parkingSpace];
-                vehicles[parkingSpace] = null;
-                freeSpaces.Push(parkingSpace);
+                var vehicle = _vehicles[parkingSpace];
+                _vehicles[parkingSpace] = default!;
+                _freeParkingSpaces.Push(parkingSpace);
                 return vehicle;
             }
-            return null;
+            return default!;
         }
 
         /// <summary>
@@ -83,18 +95,18 @@ namespace Ovning5
         /// <returns></returns>
         public IEnumerable<T> GetAllVehicles()
         {
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
             {
-                if (vehicle != null)
+                if (vehicle is not null)
                     yield return vehicle;
             }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
             {
-                if (vehicle != null)
+                if (vehicle is not null)
                     yield return vehicle;
             }
         }

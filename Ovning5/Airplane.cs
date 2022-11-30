@@ -2,8 +2,15 @@
 {
     internal class Airplane : Vehicle
     {
-        public Airplane(string color, string make, string model, string registrationNumber) : base(color, make, model, registrationNumber)
+        public double WingSpan { get; }
+        public Airplane(string color, string make, string model, string registrationNumber, double wingSpan) : base(color, make, model, registrationNumber)
         {
+            WingSpan = wingSpan;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" with a wingspan of {WingSpan} meters";
         }
 
         //protected override string generateRegistrationNumber()

@@ -8,7 +8,7 @@ namespace Ovning5
 {
     internal class Car : Vehicle
     {
-        public int NumberOfSeats { get; private set; }
+        public int NumberOfSeats { get; }
         public Car(string color, string make, string model, string registrationNumber, int numberOfSeats) : base(color, make, model, registrationNumber)
         {
             NumberOfSeats = numberOfSeats;
@@ -16,7 +16,7 @@ namespace Ovning5
 
         public override string ToString()
         {
-            return base.ToString() + $" with {NumberOfSeats} seats";
+            return $"{base.ToString()} with {NumberOfSeats} seats";
         }
 
         //protected override string generateRegistrationNumber()

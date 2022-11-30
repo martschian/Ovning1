@@ -1,8 +1,8 @@
 ﻿namespace Ovning5
 {
-    internal abstract class Vehicle
+    internal abstract class Vehicle : IVehicle
     {
-        protected static HashSet<string> _registrationNumbers = new ();
+        protected static HashSet<string> _registrationNumbers = new();
         public string RegistrationNumber { get; }
         public string Color { get; set; }
         public string Make { get; set; }
@@ -23,7 +23,7 @@
             Color = color;
             Make = make;
             Model = model;
-            
+
         }
 
         // protected abstract string generateRegistrationNumber();

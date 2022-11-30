@@ -1,18 +1,18 @@
 ﻿using Ovning5;
 using Ovning5.UserInterface;
 
-var garage = new Garage<Vehicle>(capacity: 10);
+var garage = new Garage<Vehicle>(capacity: 20);
+var carGarage = new Garage<Car>(capacity: 5);
 
-garage.ParkVehicle(new Car("blue", "BMW", "M3", "MAJ545", 4));
-garage.ParkVehicle(new Car("white", "Lexus", "G4", "abc123", 2));
-garage.ParkVehicle(new Motorcycle("black", "Harley-Davidson", "Softtail", "MML103", 4));
+carGarage.AddVehicle(new Car("blue", "BMW", "M3", "MAJ545", 4));
+carGarage.AddVehicle(new Car("white", "Lexus", "G4", "abc123", 2));
+garage.AddVehicle(new Motorcycle("black", "Harley-Davidson", "Softtail", "MML103", 4));
 
-var allVehicles = garage.GetAllVehicles();
 Console.WriteLine($"Count reported: {garage.Count}");
-Console.WriteLine($"Number of vehicles returned: {allVehicles.Count()}");
-foreach (var vehicle in allVehicles)
+Console.WriteLine($"Free spaces: {garage.Capacity - garage.Count}");
+Console.WriteLine($"Number of vehicles returned: {garage.Count()}");
+foreach (var vehicle in garage)
 {
-    
     Console.WriteLine(vehicle);
 }
 
@@ -23,11 +23,11 @@ foreach (var group in vehicleGroups)
 }
 
 // garage.ParkVehicle(new Car());
-garage.ParkVehicle(new Car("brown", "Lancia", "Delta", "IJU009", 2));
-garage.ParkVehicle(new Car("brown", "Nissan", "Altima", "OEA232", 2));
+garage.AddVehicle(new Car("brown", "Lancia", "Delta", "IJU009", 2));
+garage.AddVehicle(new Car("brown", "Nissan", "Altima", "OEA232", 2));
 
 
-allVehicles= garage.GetAllVehicles();
+var allVehicles = garage.GetAllVehicles();
 Console.WriteLine($"Count reported: {garage.Count}");
 Console.WriteLine($"Number of vehicles returned: {allVehicles.Count()}");
 foreach (var vehicle in allVehicles)
@@ -36,11 +36,11 @@ foreach (var vehicle in allVehicles)
     Console.WriteLine(vehicle);
 }
 
-garage.ParkVehicle(new Car("brown", "Honda", "Civic", "auw223", 4));
-garage.ParkVehicle(new Car("brown", "Honda", "Accordion", "aRw193", 4));
-garage.ParkVehicle(new Car("brown", "Honda", "Accord", "auw193", 4));
-garage.ParkVehicle(new Car("brown", "Mercedes", "CLK", "HHA192", 1));
-garage.ParkVehicle(new Car("brown", "Lancia", "Delta", "IJU069", 2));
+garage.AddVehicle(new Car("brown", "Honda", "Civic", "auw223", 4));
+garage.AddVehicle(new Car("brown", "Honda", "Accordion", "aRw193", 4));
+garage.AddVehicle(new Car("brown", "Honda", "Accord", "auw193", 4));
+garage.AddVehicle(new Car("brown", "Mercedes", "CLK", "HHA192", 1));
+garage.AddVehicle(new Car("brown", "Lancia", "Delta", "IJU069", 2));
 
 allVehicles = garage.GetAllVehicles();
 Console.WriteLine($"Count reported: {garage.Count}");
@@ -51,15 +51,15 @@ foreach (var vehicle in allVehicles)
     Console.WriteLine(vehicle);
 }
 var car = new Car("Silver", "Lamborghini", "Countach", "ABP420", 2);
-var (result, reason) = garage.ParkVehicle(car);
+var (result, reason) = garage.AddVehicle(car);
 
 Console.WriteLine($"{result}: {reason}");
 
-var res = garage.RetrieveVehicle("AUW223");
+var res = garage.GetVehicle("AUW223");
 Console.WriteLine($"Retrieved: {res}");
 Console.WriteLine($"Count reported: {garage.Count}");
 
-(result, reason) = garage.ParkVehicle(car);
+(result, reason) = garage.AddVehicle(car);
 Console.WriteLine($"{result}: {reason}");
 allVehicles = garage.GetAllVehicles();
 Console.WriteLine($"Count reported: {garage.Count}");
@@ -68,6 +68,8 @@ foreach (var vehicle in allVehicles)
 {
     Console.WriteLine(vehicle);
 }
+
+Console.WriteLine($"{allVehicles.Where(x=>x.RegistrationNumber == "auw193".ToUpper()).FirstOrDefault()}");
 
 
 var allBrownVehicles = garage.Where(x => x?.Color == "brown");

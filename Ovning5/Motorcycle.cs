@@ -2,11 +2,11 @@
 {
     internal class Motorcycle : Vehicle
     {
-        private readonly int numberOfWheels;
+        public int NumberOfWheels { get; }
 
         public Motorcycle(string color, string make, string model, string registrationNumber, int numberOfWheels) : base(color, make, model, registrationNumber)
         {
-            this.numberOfWheels = numberOfWheels;
+            NumberOfWheels = numberOfWheels;
         }
 
         //protected override string generateRegistrationNumber()

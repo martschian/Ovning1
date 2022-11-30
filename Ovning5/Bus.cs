@@ -2,9 +2,12 @@
 {
     internal class Bus : Vehicle
     {
-        public Bus(string color, string make, string model, string registrationNumber) : base(color, make, model, registrationNumber)
+        public int NumberOfPassengers { get; }
+        public Bus(string color, string make, string model, string registrationNumber, int numberOfPassengers) : base(color, make, model, registrationNumber)
         {
+            NumberOfPassengers = numberOfPassengers;
         }
+
 
         //protected override string generateRegistrationNumber()
         //{
