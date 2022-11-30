@@ -30,7 +30,7 @@
 
         public override string ToString()
         {
-            return $"{RegistrationNumber}: A {Color} {Make} {Model}";
+            return $"{RegistrationNumber}: A {Color} {this.GetType().Name.ToLower()} {Make} {Model}";
         }
     }
 }
