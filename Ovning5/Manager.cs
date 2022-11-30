@@ -10,8 +10,8 @@ namespace Ovning5
     internal class Manager
     {
         private readonly IUI ui;
-        GarageHandler _garageHandler;
-        public Manager(IUI ui, GarageHandler garageHandler)
+        IGarageHandler _garageHandler;
+        public Manager(IUI ui, IGarageHandler garageHandler)
         {
             _garageHandler = garageHandler;
             this.ui = ui;
@@ -53,7 +53,6 @@ namespace Ovning5
                     default:
                         ui.Print($"Ange giltigt val, 1-7. Q för att avsluta");
                         break;
-
                 }
 
             } while (true);

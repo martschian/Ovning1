@@ -1,9 +1,10 @@
 ﻿using Ovning5.UserInterface;
+using System.ComponentModel.Design;
 using System.Text.RegularExpressions;
 
 namespace Ovning5
 {
-    internal class GarageHandler
+    internal class GarageHandler : IGarageHandler
     {
         private readonly IUI _ui;
         private Garage<IVehicle> _garage;
@@ -33,8 +34,8 @@ namespace Ovning5
             {
                 _ui.Print($"Det finns inga parkerade fordon");
                 return;
-            }                
-            
+            }
+
             foreach (var vehicle in _garage)
             {
                 _ui.Print(vehicle.ToString());
@@ -42,7 +43,7 @@ namespace Ovning5
 
         }
 
-        internal void ListVehicleTypes()
+        public void ListVehicleTypes()
         {
             var vehicleGroups = _garage.GroupBy(x => x.GetType().Name);
             foreach (var group in vehicleGroups)
@@ -51,7 +52,7 @@ namespace Ovning5
             }
         }
 
-        internal void ParkVehicle()
+        public void ParkVehicle()
         {
             var vehicle = VehicleFactory.GetVehicles();
             var (_, reason) = _garage.AddVehicle(vehicle.First());
@@ -59,7 +60,7 @@ namespace Ovning5
             _ui.Print(reason);
         }
 
-        internal void RetrieveVehicle()
+        public void RetrieveVehicle()
         {
             if (_garage.Count == 0)
             {
@@ -75,7 +76,7 @@ namespace Ovning5
                 _ui.Print($"Fordonet med registrationsnummer {registrationNumber} hittades ej");
         }
 
-        internal void DisplayVehicleInfo()
+        public void DisplayVehicleInfo()
         {
             if (_garage.Count == 0)
             {
@@ -91,55 +92,87 @@ namespace Ovning5
                 _ui.Print($"Fordonet med registrationsnummer {registrationNumber} hittades ej");
         }
 
-        internal void FindVehiclesByProperty()
+        public void FindVehiclesByProperty()
         {
             if (_garage.Count == 0)
             {
                 _ui.Print($"Det finns inga parkerade fordon");
                 return;
             }
-            
+
             var typeGroups = _garage.GroupBy(x => x.GetType().Name);
+            IEnumerable<IVehicle> vehicles = _garage;
 
             var color = String.Empty;
             var type = String.Empty;
-            
-            _ui.Print($"1. Välj färg");
-            _ui.Print($"2. Välj fordonstyp");
-            _ui.Print($"3. Visa fordon");
-            var input = _ui.GetInput();
-
-            switch (input)
+            do
             {
-                case "1":
-                    SelectColor();
-                    break;
-                case "2":
-                    foreach (var typeGroup in typeGroups)
-                    {
-                        _ui.Print($"{typeGroup.Key}");
-                    }
-                    break;
-                default:
-                    break;
-            }
+                _ui.Print($"\nAntal fordon: {vehicles.Count()}");
+                _ui.Print($"1. Välj färg");
+                _ui.Print($"2. Välj fordonstyp");
+                _ui.Print($"3. Visa fordon");
+                _ui.Print($"0. Gå till huvudmenyn");
+                var input = _ui.GetInput();
 
+                switch (input)
+                {
+                    case "1":
+                        color = SelectColor(vehicles);
+                        vehicles = vehicles.Where(x => x.Color == color);
+                        break;
+                    case "2":
+                        type = SelectType(vehicles);
+                        vehicles = vehicles.Where(x => x.GetType().Name == type);
+                        break;
+                    case "3":
+                        ShowSelectedVehicles(vehicles);
+                        break;
+                    case "0":
+
+                        return;
+                    default:
+                        break;
+                }
+            } while (true);
         }
 
-        private string SelectColor()
+        private string SelectType(IEnumerable<IVehicle> vehicles)
         {
-            var colorGroups = _garage.GroupBy(x => x.Color);
-            string[] colors  = new string[colorGroups.Count()];
+
+            var typeGroups = vehicles.GroupBy(x => x.GetType().Name);
+            string[] types = new string[typeGroups.Count()];
+            var i = 1;
+            foreach (var typeGroup in typeGroups)
+            {
+                types[i - 1] = typeGroup.Key;
+                _ui.Print($"{i} {typeGroup.Key}");
+                i++;
+            }
+            return types[int.Parse(_ui.GetInput()) - 1];
+        }
+
+        private void ShowSelectedVehicles(IEnumerable<IVehicle> vehicles)
+        {
+            foreach (var vehicle in vehicles)
+            {
+                _ui.Print(vehicle.ToString());
+            };
+        }
+
+        private string SelectColor(IEnumerable<IVehicle> vehicles)
+        {
+            var colorGroups = vehicles.GroupBy(x => x.Color);
+            string[] colors = new string[colorGroups.Count()];
             var i = 1;
             foreach (var colorGroup in colorGroups)
             {
-                colors[i-1] = colorGroup.Key;   
+                colors[i - 1] = colorGroup.Key;
                 _ui.Print($"{i} {colorGroup.Key}");
                 i++;
             }
-            return colors[int.Parse(_ui.GetInput())-1];
+            return colors[int.Parse(_ui.GetInput()) - 1];
 
-            
+
         }
     }
 }

@@ -2,11 +2,11 @@ namespace Ovning5.Tests
 {
     public class GarageShould
     {
-        internal Garage<Vehicle> garage;
-        internal Vehicle? car;
+        internal Garage<IVehicle> garage;
+        internal IVehicle? car;
         public GarageShould()
         {
-            garage = new Garage<Vehicle>(capacity: 10);
+            garage = new Garage<IVehicle>(capacity: 10);
 
             //garage.ParkVehicle(new Car("blue", "BMW", "M3", 2));
             //garage.ParkVehicle(new Car("white", "Lexus", "G4", 2));
@@ -49,7 +49,7 @@ namespace Ovning5.Tests
         {
             car = new Car("red", "Volvo", "740GLE", "MAG545", 4);
             _ = garage.AddVehicle(car);
-            var actual = garage.GetVehicle("MAG545");
+            var (_, actual) = garage.GetVehicle("MAG545");
 
             Assert.Equal(car, actual);
         }
@@ -58,7 +58,7 @@ namespace Ovning5.Tests
         public void ReturnNullIfRetrieveVehicleByRegistrationNumberFails()
         {
             _ = garage.AddVehicle(new Car("red", "Volvo", "740GLE", "MAJ545", 4));
-            var actual = garage.GetVehicle("ABC345");
+            var (_, actual) = garage.GetVehicle("ABC345");
 
             Assert.Null(actual);
         }
@@ -83,7 +83,7 @@ namespace Ovning5.Tests
             //expected.Add(car);
 
 
-            var actual = garage.GetAllVehicles();
+            var actual = garage;
 
             Assert.Equal(expected.OrderByDescending(x => x.RegistrationNumber), 
                          actual.OrderByDescending(x => x.RegistrationNumber));
