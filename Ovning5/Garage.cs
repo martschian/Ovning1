@@ -89,19 +89,6 @@ namespace Ovning5
             return default!;
         }
 
-        /// <summary>
-        /// Get all vehickles
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<T> GetAllVehicles()
-        {
-            foreach (var vehicle in _vehicles)
-            {
-                if (vehicle is not null)
-                    yield return vehicle;
-            }
-        }
-
         public IEnumerator<T> GetEnumerator()
         {
             foreach (var vehicle in _vehicles)
