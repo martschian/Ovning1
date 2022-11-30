@@ -2,20 +2,14 @@
 {
     internal class ConsoleUI : IUI
     {
-        public void ShowMainMenu()
+        public string GetInput()
         {
-            Console.WriteLine($"1. Lista parkerade fordon");
-            Console.WriteLine($"2. Lista fordonstyper");
-            Console.WriteLine($"3. Parkera fordon");
-            Console.WriteLine($"4. Hämta ut fordon");
-            Console.WriteLine($"5. Hitta fordon");
-            Console.WriteLine($"6. Sök på egenskap");
-            Console.WriteLine($"7. Fyll garaget");
+            return Console.ReadLine()!;
         }
 
-        public ConsoleKey GetKey()
+        public void Print(string message)
         {
-            return Console.ReadKey(true).Key;
+            Console.WriteLine(message);
         }
     }
 }

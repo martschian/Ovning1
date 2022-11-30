@@ -2,7 +2,7 @@
 {
     internal interface IUI
     {
-        ConsoleKey GetKey();
-        void ShowMainMenu();
+        string GetInput();
+        void Print(string message);
     }
 }

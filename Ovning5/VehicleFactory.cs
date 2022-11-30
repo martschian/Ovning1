@@ -5,14 +5,19 @@ namespace Ovning5
 {
     internal class VehicleFactory
     {
-        internal static List<IVehicle> GetVehicles(int numberOfVehicles)
+        /// <summary>
+        /// Generate random type of vehicle(s)
+        /// </summary>
+        /// <param name="numberOfVehicles"></param>
+        /// <returns></returns>
+        internal static List<IVehicle> GetVehicles(int numberOfVehicles = 1)
         {
             var vehicles = new List<IVehicle>();
             var rnd = new Random();
 
             for (int i = 0; i < numberOfVehicles; i++)
             {
-                switch (rnd.Next(1, 5))
+                switch (rnd.Next(1, 6))
                 {
                     case 1:
                         vehicles.Add(new Car("Blue", "Volvo", "740", rnd.RandomRegistrationNumber(6, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 4));

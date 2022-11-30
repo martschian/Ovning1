@@ -49,15 +49,15 @@ namespace Ovning5
         /// </summary>
         /// <param name="registrationNumber">The registration number of the requested vehicle</param>
         /// <returns>The index of the vehicle or -1</returns>
-        public int FindVehicle(string registrationNumber)
+        public (bool, int) FindVehicle(string registrationNumber)
         {
             // var result = vehicles.FirstOrDefault(vehicle => vehicle.RegistrationNumber == registrationNumber);
             foreach (var vehicle in _vehicles)
             {
                 if (vehicle?.RegistrationNumber == registrationNumber)
-                    return Array.IndexOf<T>(_vehicles, vehicle);
+                    return (true, Array.IndexOf<T>(_vehicles, vehicle));
             }
-            return -1;
+            return (false, -1);
         }
 
         /// <summary>
@@ -74,19 +74,19 @@ namespace Ovning5
         /// </summary>
         /// <param name="registrationNumber"></param>
         /// <returns>The vehicle or default</returns>
-        public T GetVehicle(string registrationNumber)
+        public (bool, T) GetVehicle(string registrationNumber)
         {
             if (Count == 0) return default!;
 
-            var parkingSpace = FindVehicle(registrationNumber);
-            if (parkingSpace != -1)
+            var (result, index) = FindVehicle(registrationNumber);
+            if (result)
             {
-                var vehicle = _vehicles[parkingSpace];
-                _vehicles[parkingSpace] = default!;
-                _freeParkingSpaces.Push(parkingSpace);
-                return vehicle;
+                var vehicle = _vehicles[index];
+                _vehicles[index] = default!;
+                _freeParkingSpaces.Push(index);
+                return (true, vehicle);
             }
-            return default!;
+            return (false, default!);
         }
 
         public IEnumerator<T> GetEnumerator()
