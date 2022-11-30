@@ -8,6 +8,6 @@
         void ListVehicleTypes();
         void ParkVehicle();
         void PopulateGarage(int? numberOfVehicles = null);
-        void RetrieveVehicle();
+        IVehicle? RetrieveVehicle();
     }
 }
