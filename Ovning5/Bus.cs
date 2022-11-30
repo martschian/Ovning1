@@ -7,7 +7,10 @@
         {
             NumberOfPassengers = numberOfPassengers;
         }
-
+        public override string ToString()
+        {
+            return $"{base.ToString()} holding {NumberOfPassengers} passengers";
+        }
 
         //protected override string generateRegistrationNumber()
         //{

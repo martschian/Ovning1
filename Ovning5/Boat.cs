@@ -9,6 +9,11 @@
 
         public int NumberOfEngines { get; }
 
+        public override string ToString()
+        {
+            return $"{base.ToString()} with {NumberOfEngines} engines.";
+        }
+
         //protected override string generateRegistrationNumber()
         //{
         //    throw new NotImplementedException();

@@ -9,6 +9,10 @@
             NumberOfWheels = numberOfWheels;
         }
 
+        public override string ToString()
+        {
+            return $"{base.ToString()} with {NumberOfWheels} wheels.";
+        }
         //protected override string generateRegistrationNumber()
         //{
         //    throw new NotImplementedException();
